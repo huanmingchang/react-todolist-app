@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 
 const Todos = (props) => {
-  const { todos, setTodos } = props
+  const { todos, setTodos, filteredTodos } = props
 
   const changeCompleted = (item) => {
     setTodos(
@@ -31,7 +31,7 @@ const Todos = (props) => {
 
   return (
     <>
-      {todos.map((item) => {
+      {filteredTodos.map((item) => {
         return (
           <li key={item.id}>
             <label className='todoList_label'>
