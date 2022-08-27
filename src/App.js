@@ -40,6 +40,7 @@ function App() {
     },
   ])
   const [newTodo, setNewTodo] = useState('')
+  const [currentTab, setCurrentTab] = useState('all')
 
   const showNotCompletedTodos = () => {
     return todos.filter((todo) => todo.completed === false).length + ' '
@@ -47,6 +48,34 @@ function App() {
 
   const clearCompleted = () => {
     setTodos(todos.filter((todo) => todo.completed === false))
+  }
+
+  const changeTab = (tab) => {
+    if (tab === 'all') {
+      setCurrentTab('all')
+    }
+
+    if (tab === 'active') {
+      setCurrentTab('active')
+    }
+
+    if (tab === 'completed') {
+      setCurrentTab('completed')
+    }
+  }
+
+  const filteredTodos = () => {
+    if (currentTab === 'all') {
+      return todos
+    }
+
+    if (currentTab === 'active') {
+      return todos.filter((todo) => !todo.completed)
+    }
+
+    if (currentTab === 'completed') {
+      return todos.filter((todo) => todo.completed)
+    }
   }
 
   return (
@@ -66,20 +95,40 @@ function App() {
               <div className='todoList_list'>
                 <ul className='todoList_tab'>
                   <li>
-                    <a href='#' className='active'>
+                    <a
+                      href='#'
+                      className={currentTab === 'all' ? 'active' : ''}
+                      onClick={() => changeTab('all')}
+                    >
                       全部
                     </a>
                   </li>
                   <li>
-                    <a href='#'>待完成</a>
+                    <a
+                      href='#'
+                      className={currentTab === 'active' ? 'active' : ''}
+                      onClick={() => changeTab('active')}
+                    >
+                      待完成
+                    </a>
                   </li>
                   <li>
-                    <a href='#'>已完成</a>
+                    <a
+                      href='#'
+                      className={currentTab === 'completed' ? 'active' : ''}
+                      onClick={() => changeTab('completed')}
+                    >
+                      已完成
+                    </a>
                   </li>
                 </ul>
                 <div className='todoList_items'>
                   <ul className='todoList_item'>
-                    <Todos todos={todos} setTodos={setTodos} />
+                    <Todos
+                      todos={todos}
+                      setTodos={setTodos}
+                      filteredTodos={filteredTodos()}
+                    />
                   </ul>
                   <div className='todoList_statistics'>
                     <p>{showNotCompletedTodos()}個待完成項目</p>
