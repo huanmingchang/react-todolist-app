@@ -139,7 +139,7 @@ function App() {
                 </ul>
                 <div className='todoList_items'>
                   {filteredTodos().length === 0 ? (
-                    <p className='empty-tab-content'>
+                    <p className='todoList_item todoList_label'>
                       這個類別目前沒有待辦事項
                     </p>
                   ) : (
