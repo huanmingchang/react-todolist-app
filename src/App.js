@@ -39,6 +39,7 @@ function App() {
       completed: false,
     },
   ])
+  const [newTodo, setNewTodo] = useState('')
 
   const showNotCompletedTodos = () => {
     return todos.filter((todo) => todo.completed === false).length + ' '
@@ -54,7 +55,11 @@ function App() {
         <Nav />
         <div className='conatiner todoListPage vhContainer'>
           <div className='todoList_Content'>
-            <Input />
+            <Input
+              newTodo={newTodo}
+              setNewTodo={setNewTodo}
+              setTodos={setTodos}
+            />
             {todos.length === 0 ? (
               <NoContent />
             ) : (
