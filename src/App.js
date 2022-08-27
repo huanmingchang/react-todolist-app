@@ -2,8 +2,43 @@ import './styles/App.css'
 import Nav from './components/Nav'
 import Input from './components/Input'
 import Todos from './components/Todos'
+import { v4 as uuidv4 } from 'uuid'
+import { useState } from 'react'
 
 function App() {
+  const [todos, setTodos] = useState([
+    {
+      id: uuidv4(),
+      content: '把冰箱發霉的檸檬拿去丟',
+      completed: true,
+    },
+    {
+      id: uuidv4(),
+      content: '打電話叫媽媽匯款給我',
+      completed: false,
+    },
+    {
+      id: uuidv4(),
+      content: '整理電腦資料夾',
+      completed: false,
+    },
+    {
+      id: uuidv4(),
+      content: '繳電費水費瓦斯費',
+      completed: false,
+    },
+    {
+      id: uuidv4(),
+      content: '約vicky禮拜三泡溫泉',
+      completed: false,
+    },
+    {
+      id: uuidv4(),
+      content: '約ada禮拜四吃晚餐',
+      completed: false,
+    },
+  ])
+
   return (
     <div className='App'>
       <div id='todoListPage' className='bg-half'>
@@ -27,7 +62,7 @@ function App() {
               </ul>
               <div className='todoList_items'>
                 <ul className='todoList_item'>
-                  <Todos />
+                  <Todos todos={todos} setTodos={setTodos} />
                 </ul>
                 <div className='todoList_statistics'>
                   <p> 5 個已完成項目</p>
