@@ -43,6 +43,10 @@ function App() {
     return todos.filter((todo) => todo.completed === false).length + ' '
   }
 
+  const clearCompleted = () => {
+    setTodos(todos.filter((todo) => todo.completed === false))
+  }
+
   return (
     <div className='App'>
       <div id='todoListPage' className='bg-half'>
@@ -70,7 +74,9 @@ function App() {
                 </ul>
                 <div className='todoList_statistics'>
                   <p>{showNotCompletedTodos()}個待完成項目</p>
-                  <a href='#'>清除已完成項目</a>
+                  <a href='#' onClick={() => clearCompleted()}>
+                    清除已完成項目
+                  </a>
                 </div>
               </div>
             </div>
