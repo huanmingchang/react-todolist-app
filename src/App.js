@@ -138,13 +138,19 @@ function App() {
                   </li>
                 </ul>
                 <div className='todoList_items'>
-                  <ul className='todoList_item'>
-                    <Todos
-                      todos={todos}
-                      setTodos={setTodos}
-                      filteredTodos={filteredTodos()}
-                    />
-                  </ul>
+                  {filteredTodos().length === 0 ? (
+                    <p className='empty-tab-content'>
+                      這個類別目前沒有待辦事項
+                    </p>
+                  ) : (
+                    <ul className='todoList_item'>
+                      <Todos
+                        todos={todos}
+                        setTodos={setTodos}
+                        filteredTodos={filteredTodos()}
+                      />
+                    </ul>
+                  )}
                   <div className='todoList_statistics'>
                     <p>{showNotCompletedTodos()}個待完成項目</p>
                     <a href='#' onClick={() => clearCompleted()}>
