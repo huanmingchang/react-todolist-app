@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2'
+
 const Todos = (props) => {
   const { todos, setTodos } = props
 
@@ -7,6 +9,24 @@ const Todos = (props) => {
         todo.id === item.id ? { ...todo, completed: !todo.completed } : todo
       )
     )
+  }
+
+  const deleteTodo = (item) => {
+    Swal.fire({
+      title: '稍等一下',
+      text: '確定要刪除這筆待辦事項？',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      confirmButtonColor: '#d87355',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setTodos(todos.filter((todo) => todo.id !== item.id))
+      }
+
+      return
+    })
   }
 
   return (
@@ -25,7 +45,7 @@ const Todos = (props) => {
               <span>{item.content}</span>
             </label>
             <a href='#'>
-              <i className='fa fa-times'></i>
+              <i className='fa fa-times' onClick={() => deleteTodo(item)}></i>
             </a>
           </li>
         )
