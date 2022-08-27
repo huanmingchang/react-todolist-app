@@ -2,6 +2,7 @@ import './styles/App.css'
 import Nav from './components/Nav'
 import Input from './components/Input'
 import Todos from './components/Todos'
+import NoContent from './components/NoContent'
 import { v4 as uuidv4 } from 'uuid'
 import { useState } from 'react'
 
@@ -54,32 +55,36 @@ function App() {
         <div className='conatiner todoListPage vhContainer'>
           <div className='todoList_Content'>
             <Input />
-            <div className='todoList_list'>
-              <ul className='todoList_tab'>
-                <li>
-                  <a href='#' className='active'>
-                    全部
-                  </a>
-                </li>
-                <li>
-                  <a href='#'>待完成</a>
-                </li>
-                <li>
-                  <a href='#'>已完成</a>
-                </li>
-              </ul>
-              <div className='todoList_items'>
-                <ul className='todoList_item'>
-                  <Todos todos={todos} setTodos={setTodos} />
+            {todos.length === 0 ? (
+              <NoContent />
+            ) : (
+              <div className='todoList_list'>
+                <ul className='todoList_tab'>
+                  <li>
+                    <a href='#' className='active'>
+                      全部
+                    </a>
+                  </li>
+                  <li>
+                    <a href='#'>待完成</a>
+                  </li>
+                  <li>
+                    <a href='#'>已完成</a>
+                  </li>
                 </ul>
-                <div className='todoList_statistics'>
-                  <p>{showNotCompletedTodos()}個待完成項目</p>
-                  <a href='#' onClick={() => clearCompleted()}>
-                    清除已完成項目
-                  </a>
+                <div className='todoList_items'>
+                  <ul className='todoList_item'>
+                    <Todos todos={todos} setTodos={setTodos} />
+                  </ul>
+                  <div className='todoList_statistics'>
+                    <p>{showNotCompletedTodos()}個待完成項目</p>
+                    <a href='#' onClick={() => clearCompleted()}>
+                      清除已完成項目
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
