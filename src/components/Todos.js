@@ -1,6 +1,14 @@
 const Todos = (props) => {
   const { todos, setTodos } = props
 
+  const changeCompleted = (item) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === item.id ? { ...todo, completed: !todo.completed } : todo
+      )
+    )
+  }
+
   return (
     <>
       {todos.map((item) => {
@@ -11,7 +19,8 @@ const Todos = (props) => {
                 className='todoList_input'
                 type='checkbox'
                 value={item.completed}
-                checked={item.completed}
+                checked={item.completed ? 'checked' : ''}
+                onChange={() => changeCompleted(item)}
               />
               <span>{item.content}</span>
             </label>
