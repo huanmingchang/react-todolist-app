@@ -39,6 +39,10 @@ function App() {
     },
   ])
 
+  const showNotCompletedTodos = () => {
+    return todos.filter((todo) => todo.completed === false).length + ' '
+  }
+
   return (
     <div className='App'>
       <div id='todoListPage' className='bg-half'>
@@ -65,7 +69,7 @@ function App() {
                   <Todos todos={todos} setTodos={setTodos} />
                 </ul>
                 <div className='todoList_statistics'>
-                  <p> 5 個已完成項目</p>
+                  <p>{showNotCompletedTodos()}個待完成項目</p>
                   <a href='#'>清除已完成項目</a>
                 </div>
               </div>
