@@ -4,6 +4,7 @@ import Input from './components/Input'
 import Todos from './components/Todos'
 import NoContent from './components/NoContent'
 import { v4 as uuidv4 } from 'uuid'
+import Swal from 'sweetalert2'
 import { useState } from 'react'
 
 function App() {
@@ -47,7 +48,21 @@ function App() {
   }
 
   const clearCompleted = () => {
-    setTodos(todos.filter((todo) => todo.completed === false))
+    Swal.fire({
+      title: '稍等一下',
+      text: '確定要清除所有完成事項？',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      confirmButtonColor: '#d87355',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setTodos(todos.filter((todo) => todo.completed === false))
+      }
+
+      return
+    })
   }
 
   const changeTab = (tab) => {
