@@ -1,4 +1,4 @@
-# React Todo List App - API version
+# React Todo List App
 
 這是用 creact-react-app 建立的 Todo List App
 
